@@ -1,10 +1,11 @@
 from django.urls import path
 
-from . import views
-app_name = 'Fuel'
+from .views import *
 
+app_name = 'Fuel'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('login/',views.LoginFormView.as_view(), name='login'),
-    path('signup/',views.UserCreateView.as_view(), name='signup')
+    path('', index, name='index'),
+    path('login/', LoginFormView.as_view(), name='login'),
+    path('register/', RegisterFormView.as_view(), name='register'),
+    path('logout/', logout_user, name='logout'),
 ]
