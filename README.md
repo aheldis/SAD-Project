@@ -8,7 +8,8 @@
 # Setup
 
 ```
-docker-compose up
+cd FuelApp
+sudo docker-compose up
 ```
 
 if you changed requirements or dockerfile.base use `--build` flag
