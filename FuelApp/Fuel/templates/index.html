@@ -1,16 +1,33 @@
 {% extends 'base.html' %}
 {% block title %}
-    Home Page
+Home Page
 {% endblock %}
 {% block body %}
-    <div class="container">
-    {% if error %}
-        {% if username_unavailable %}
-            <div>Username is not available</div>
-        {% endif %}
-        {% if login_error %}
-            <div>Username or Password incorrect</div>
-        {% endif %}
-    {% endif %}
+
+{% if error %}
+<div class="container">
+    <div class="row card-panel s12">
+        <div class="container">
+            <form class="col s12 align-center" method="post">
+                <div class="">
+                    {% if username_unavailable %}
+                    <div>Username is not available</div>
+                    {% endif %}
+                    {% if login_error %}
+                    <div>Username or Password incorrect</div>
+                    {% endif %}
+                    {% if map_error %}
+                    <div>{{ message }}</div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
     </div>
+</div>
+{% endif %}
+
+<center>
+     <img src="https://s20.picofile.com/file/8445260476/fuel.jpg" alt="Fuel App" width="750" height="500">
+</center>
+
 {% endblock %}
