@@ -250,3 +250,27 @@ def show_map(request):
     elif role == User.Role.USER:
         return redirect('Fuel:dashboard')
 
+    try:
+        locations = []
+        for ip in ips:
+            ipDict = {}
+            ipDict['query'] = ip[0]
+            locations.append(ipDict)
+        response = requests.post("http://ip-api.com/batch", json=locations).json()
+        points = []
+        for i in range(len(response)):
+            points.append([response[i]['lat'], response[i]['lon'], ips[i][1]])
+
+        print("points:---------", points)
+        my_map = folium.Map(location=get_center_coordinates(points), zoom_start=get_zoom(points))
+
+        feature_group = folium.FeatureGroup("Locations")
+
+        for i in range(len(points)):
+            feature_group.add_child(folium.Marker(location=[points[i][0], points[i][1]],
+                                                  popup=points[i][2], icon=folium.Icon(color=colors[i])))
+
+        my_map.add_child(feature_group)
+        return render(request, 'map.html', {"map": my_map._repr_html_(), "error": False})
+    except:
+        return render(request, 'map.html', {"error": True, "message": message})
