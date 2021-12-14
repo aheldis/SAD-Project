@@ -18,3 +18,4 @@ urlpatterns = [
             check_fuel_request_assigned, name='check-agent-available'),
     path('map/', show_map, name="map"),
 ]
+
